@@ -1,6 +1,7 @@
 import "./App.css";
 import ProductProvider from "./Context/Productcontext";
-import {Header, Hero, NewArrival, TopCollection, LatestCollection} from "./Components"
+import {Header, Hero, NewArrival, TopCollection, LatestCollection, Statistique} from "./Components"
+
 function App() {
   return (
     <ProductProvider>
@@ -13,6 +14,7 @@ function App() {
           <NewArrival/>
           <LatestCollection/>
         </div>
+          <Statistique/>
     </div>
       </ProductProvider>
   );

@@ -1,12 +1,12 @@
 .productList__container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(355px, 1fr));
     justify-items: center;
 }
 
-@media screen and (max-width:320px) {
+@media screen and (max-width:400px) {
     .productList__container {
-    grid-template-columns: repeat(auto-fill, minmax(222px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     }
 }
 

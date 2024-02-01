@@ -14,6 +14,7 @@ const initialState = {
             imgUrl: "/Images/swet.png",
             categorie: "Clothes",
             isTopCollection: true,
+            productYear:2024
 
         },
         {
@@ -34,6 +35,7 @@ const initialState = {
             imgUrl:"/Images/apple-watch-series-2.png",
             categorie: "Accessories",
             isTopCollection: true,
+            productYear:2024
         },
         {
             id:4,
@@ -101,6 +103,7 @@ const initialState = {
             isTopCollection: false,
 
         },
+
     ],
     productsFiltred: [
         {
@@ -111,6 +114,7 @@ const initialState = {
             imgUrl: "/Images/swet.png",
             categorie: "Clothes",
             isTopCollection: true,
+            productYear:2024
 
         },
         {

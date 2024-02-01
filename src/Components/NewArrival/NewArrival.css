@@ -3,16 +3,23 @@
 }
 
 .newArrival__container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-    gap: 50px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
-@media screen and (max-width:500px) {
-    .newArrival__container {
-        grid-template-columns: repeat(auto-fill, minmax(226px, 1fr));
+.newArrival__container > div {
+    width: 48%;
+}
+
+@media screen and (max-width:991px) {
+    .newArrival__container > div {
+      width: 100%;
+      margin-bottom: 18px;
     }
 }
+
+
 
 .newArrival__left {
     display: flex;
@@ -24,7 +31,6 @@
 
 .newArrival__left > div {
     min-height: 259px;
-    
     display: flex;
     flex-direction: column;
     justify-content: flex-end;

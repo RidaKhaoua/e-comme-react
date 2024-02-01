@@ -5,7 +5,7 @@ import "./Latestcollection.css";
 function Latestcollection() {
   const { products } = useProducts();
   const getLatestCollection = products.filter(
-    (products) => products.productYear === 2024
+    (product) => product.productYear === 2024
   );
   const displayProducts = getLatestCollection.map((product) => (
     <Product key={product.id} product={product} />

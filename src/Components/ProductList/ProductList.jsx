@@ -3,6 +3,7 @@
 import Product from "../Product/Product";
 import "./ProductList.css";
 import { useProducts } from "../../Context/Productcontext";
+import Noproducts from "../Noproducts/Noproducts";
 export default function ProductList() {
   const { productsFiltred } = useProducts();
 
@@ -16,7 +17,7 @@ export default function ProductList() {
 
   return (
     <div className="productList">
-      {productsFiltred.length === 0 && <h1>No Products</h1>}
+      {productsFiltred.length === 0 && <Noproducts/>}
       <div className="productList__container">
         {productsFiltred.length > 0 && displayData}
       </div>

@@ -2,6 +2,7 @@
 :root {
   --primary-color: #000;
   --secondary-color: #4F5665;
+  --color: #FF5E3A;
   --bg-color: #FF5E3A;
   --linear-bg: linear-gradient(180deg, rgba(252, 203, 144, 0.44) 0%, rgba(255, 154, 158, 0.38) 100%);
   --raduis-10: 10px;
