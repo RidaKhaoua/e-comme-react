@@ -1,6 +1,6 @@
 import "./App.css";
 import ProductProvider from "./Context/Productcontext";
-import {Header, Hero, NewArrival, TopCollection, LatestCollection, Statistique} from "./Components"
+import {Header, Hero, NewArrival, TopCollection, LatestCollection, Statistique, Footer} from "./Components"
 
 function App() {
   return (
@@ -15,6 +15,7 @@ function App() {
           <LatestCollection/>
         </div>
           <Statistique/>
+          <Footer/>
     </div>
       </ProductProvider>
   );
