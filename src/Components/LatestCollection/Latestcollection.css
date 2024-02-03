@@ -10,7 +10,7 @@
     margin: 18px 0;
 }
 
-.latest-collection__products .card__image {
+.latest-collection__products .cardProduct__image {
     background-color: #F0F0F0 !important;
     background-image: none;
 }
