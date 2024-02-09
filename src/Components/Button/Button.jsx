@@ -8,7 +8,7 @@ export default function Button({ name, changeCategorie, cat }) {
 
   return (
     <button 
-    className={`button ${name === cat ? "active" : ""} `}
+    className={`button-filter ${name === cat ? "active" : ""} `}
     onClick={() => {
         changeCategorie(name)
         if(name === "All") {

@@ -13,7 +13,6 @@ import {
 
 function App() {
   return (
-    <ProductProvider>
       <div className="app">
         <Header />
         <div className="container">
@@ -28,7 +27,7 @@ function App() {
         </div>
         <Footer />
       </div>
-    </ProductProvider>
+
   );
 }
 

@@ -1,0 +1,15 @@
+.shopPage__products {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
+        gap: 10px;
+}
+
+.shopPage__products .cardProduct__image {
+    background: white;
+}
+
+.shopPage__products img {
+    width: 180px;
+    height: 180px;
+    object-fit: contain;
+}

@@ -5,7 +5,7 @@ import Card from '../CardProduct/CardProduct';
 export default function Product({product}) {
   return (
     <div className="product">
-      <Card img={product.imgUrl} title={product.productName} price={product.price}/>
+      <Card id={product.id} img={product.image} title={product.title} price={product.price}/>
     </div>
   );
 }
