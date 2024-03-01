@@ -4,7 +4,11 @@ import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import Person2OutlinedIcon from "@mui/icons-material/Person2Outlined";
 import LocalGroceryStoreOutlinedIcon from "@mui/icons-material/LocalGroceryStoreOutlined";
 import { Link } from 'react-router-dom';
+import { useProducts } from "../../Context/Productcontext";
+import { useShopList } from "../../Context/ShopListcontext";
 function Navigation({className}) {
+  const {shopingList} = useProducts();
+  const {showShoplist} = useShopList();
   return (
     <div className={className}>
         <ul>
@@ -27,8 +31,10 @@ function Navigation({className}) {
             <SearchOutlinedIcon className="header__icon" />
             <Person2OutlinedIcon className="header__icon" />
             <div className="header__shop">
+              <button  onClick={showShoplist} style={{cursor:"pointer"}}>
               <LocalGroceryStoreOutlinedIcon className="header__icon shop" />
-              <span>0</span>
+              <span>{shopingList.length}</span>
+              </button>
             </div>
           </div>
     </div>

@@ -6,5 +6,7 @@ export {default as LatestCollection} from "./LatestCollection/Latestcollection";
 export {default as Statistique } from "./Statistique/Statistique";
 export {default as LatestNews } from "./LatestNews/LatestNews";
 export {default as Footer } from "./Footer/Footer";
+// export {default as TableOfProducts } from "./TableOfProducts/TableOfProducts";
+
 
 

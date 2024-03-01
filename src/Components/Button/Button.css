@@ -1,4 +1,4 @@
-button {
+.button-filter {
     width: 100px;
     height: 60px;
     display: flex;
@@ -10,7 +10,7 @@ button {
     cursor: pointer;
 }
 
-button.active {
+.button-filter.active {
     position: relative;
     z-index: 1;
     border-radius: 10px;
@@ -18,7 +18,7 @@ button.active {
     color: white;
 }
 
-button.active::before {
+.button-filter.active::before {
     content: "";
     position: absolute;
     z-index: -1;

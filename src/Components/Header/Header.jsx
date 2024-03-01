@@ -5,8 +5,10 @@ import { useState } from "react";
 
 import Navigation from "../Nav/Nav";
 import Logo from "../Logo/Logo";
+
 export default function Header() {
   const [showNav, setShowNav] = useState(false);
+
 
   const handelShowNave = () => {
     setShowNav(!showNav);
@@ -15,12 +17,8 @@ export default function Header() {
   return (
     <header className="header">
       <div className="container">
-        {/* <div className="header__logo">
-          <h3>Shopifyo</h3>
-        </div> */}
         <Logo/>
         <Navigation className="header__nav" />
-
         <div className="header__toggle-menu" onClick={handelShowNave}>
           <MenuOutlinedIcon />
         </div>
