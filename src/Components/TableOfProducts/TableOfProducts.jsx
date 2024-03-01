@@ -1,30 +1,77 @@
+/* eslint-disable react/prop-types */
 
 import { useProducts } from "../../Context/Productcontext";
 import { useShopList } from "../../Context/ShopListcontext";
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
+
 import "./TableOfProducts.css";
+import { useEffect, useState } from "react";
+import ControleQuantity from "../ControleQuatity/ControleQuantity";
 
 function TableOfProducts() {
-  const { open, closeShoplist,  } = useShopList();
-  const {shopingList, addQuantitiyPlus, minQuantitiy, deleteProduct} = useProducts();
-  // const [QuantityState, setQuantitiyState] = useState(0);
+  const { open, closeShoplist } = useShopList();
+
+  const {
+    shopingList,
+    deleteProduct,
+    idProductSelected,
+    updateId,
+  } = useProducts();
+  const [idProduct, setIdproduct] = useState([]); // [] | [1]
+  // skip in the first load
+  useEffect(() => {
+    if (idProductSelected !== 0) // 0 - 0  | 1 - 0
+      setIdproduct([...idProduct, idProductSelected]);
+  }, [idProductSelected]);
+
+  // work when click on button delete
+  const handelUpdatIdProduct = (id) => {
+    let newIds = idProduct.filter((product) => product !== id);
+    setIdproduct([...newIds]);
+  };
 
   const displayData = shopingList.map((item) => {
-    console.log(item.qty)
     return (
-      <div key={item.id} className="table-products__content">
-        <img src={item.img} alt="" />
+      <div
+        key={item.id}
+        className={`table-products__content ${
+          idProduct.some((product) => product === item.id) ? "active" : ""
+        } `}>
+        <div className="table-products__image">
+          <img src={item.img} alt="" />
+        </div>
         <div className="table-products__info">
           <div className="table-products__title-qantity-wraper">
             <div className="table-products__title">{item.title}</div>
             <div className="table-products__quantity">
-              <button onClick={() => {minQuantitiy(item.id)}}>-</button>
-              <input type="text" value={item.qty}/>
-              <button onClick={() => {addQuantitiyPlus(item.id)}} >+</button>
+              {/* <button
+                onClick={() => {
+                  minQuantitiy(item.id);
+                }}>
+                -
+              </button>
+              <input readOnly type="text" value={item.qty ? item.qty : 0} />
+              <button
+                onClick={() => {
+                  setQty(item.qty)
+                  addQuantitiyPlus(item.id, qty);
+                }}>
+                +
+              </button> */}
+              <ControleQuantity id={item.id} qtyProduct={item.qty}/>
             </div>
-          <div className="table-products__price" style={{color:"black", marginTop:"10px", fontWeight:"700"}}>${item.price}</div>    
+            <div className="table-products__price">${item.totalPrice === 0 ? item.price : item.totalPrice}</div>
           </div>
           <div className="table-products__btn-remove">
-            <button onClick={() => {deleteProduct(item.id)}}>remove</button>
+            <button
+              onClick={() => {
+                deleteProduct(item.id);
+                handelUpdatIdProduct(item.id);
+                updateId(0);
+              }}>
+              <DeleteOutlineOutlinedIcon />
+            </button>
           </div>
         </div>
       </div>
@@ -32,12 +79,22 @@ function TableOfProducts() {
   });
 
   return (
-    <div className={`table-products ${open ? "show" : ""}`}>
+    <div className="table-products-container">
+      <div className={`table-products ${open ? "show" : ""}`}>
       <div className="close" onClick={closeShoplist}>
         X
       </div>
-      {shopingList.length > 0 && displayData }
+      <h1 className="table-products__title">
+        <ShoppingBagOutlinedIcon />
+        <span>Your Cart</span>
+      </h1>
+      <div className="table-products__container">{displayData}</div>
+      <div className="table-products__checkout">
+        <button>Checkout</button>
+      </div>
     </div>
+    </div>
+    
   );
 }
 
