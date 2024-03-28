@@ -1,5 +1,4 @@
 import "./App.css";
-import ProductProvider from "./Context/Productcontext";
 import {
   Header,
   Hero,
@@ -10,11 +9,14 @@ import {
   LatestNews,
   Footer,
 } from "./Components";
+import TableOfProducts from "./Components/TableOfProducts/TableOfProducts";
 
 function App() {
+  
   return (
       <div className="app">
         <Header />
+        <TableOfProducts />
         <div className="container">
           <Hero />
           <TopCollection />

@@ -8,7 +8,7 @@ export default function ProductList() {
   const { productsFiltred } = useProducts();
 
   const getTopCollection = productsFiltred.filter((product) =>product.isTopCollection);
-    console.log(getTopCollection)
+    
   const displayData = getTopCollection.map(product => {
     return (
         <Product key={product.id} product={product} />
