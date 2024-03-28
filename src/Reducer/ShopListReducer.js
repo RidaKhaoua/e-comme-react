@@ -1,9 +1,9 @@
 export default (currentState, action) => {
     switch(action.type) {
         case "SHOW__SHOPLIST":
-        return {...currentState, isOpen: true}
+        return {isOpen: true}
         case "CLOSE__SHOPLIST": 
-        return {...currentState, isOpen:false}
+        return {isOpen: false}
         default:
             return currentState;
     }

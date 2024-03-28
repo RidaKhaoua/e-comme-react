@@ -4,6 +4,12 @@
     width: 320px;
     overflow: hidden;
     cursor: pointer;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.cardProduct.disabled {
+    opacity: 0.5;
+    pointer-events: none;
 }
 
 .cardProduct__image {
@@ -14,6 +20,14 @@
     justify-content: center;
     position: relative;
     padding: 30px 0;
+}
+
+.cardProduct__image img {
+    transition: 0.4s ease-in-out;
+}
+
+.cardProduct__image img:hover {
+    transform: scale(1.1);
 }
 
 
@@ -63,3 +77,4 @@
     color: var(--color);
     font-weight: 600    ;
 }
+

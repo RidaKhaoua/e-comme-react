@@ -1,30 +1,45 @@
-import { useEffect, useState } from "react";
+import { useRef } from "react";
 import Header from "../../Components/Header/Header";
 import Product from "../../Components/Product/Product";
 import Footer from "../../Components/Footer/Footer";
+import TableOfProducts from "../../Components/TableOfProducts/TableOfProducts";
+
 import "./ShopPage.css";
+import { Modalproduct } from "../../Components";
+import { useProducts } from "../../Context/Productcontext";
+import IsLoading from "../../Components/IsLoading/IsLoading";
 
 function ShopPage() {
-  const [products, setProducts] = useState([]);
-  const abortController = new AbortController();
+  console.log("render shop");
+  const {
+    productFromApi: { isLoading, products, error },
+    getProductById,
+  } = useProducts();
+  const containerRef = useRef(null);
 
-  useEffect(() => {
-    const getAllProducts = async () => {
-      try {
-        const response = await fetch("https://fakestoreapi.com/products/");
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error("Error fetching products:", error);
-      }
-    };
+  // useEffect(() => {
+  //   if (id) {
+  //     let getIdValue = id.slice(id.indexOf("=") + 1, id.length);
+  //     const getProduct = async () => {
+  //       if (id) {
+  //         setIsLoading(true);
 
-    getAllProducts();
+  //         try {
+  //           const response = await fetch(
+  //             `https://fakestoreapi.com/products/${getIdValue}`
+  //           );
+  //           const data = await response.json();
+  //           setProduct(data);
+  //         } catch (e) {
+  //           setError(e);
+  //         }
+  //       }
+  //       setIsLoading(false);
+  //     };
 
-    return () => {
-      abortController.abort();
-    };
-  }, []);
+  //     getProduct();
+  //   }
+  // }, [id]);
 
   const displayProducts = products.map((product) => (
     <Product key={product.id} product={product} />
@@ -32,14 +47,28 @@ function ShopPage() {
 
   return (
     <div className="shopPage">
-      <Header />
-      <div className="container">
-        <div className="shopPage__products">
-          {products.length === 0 && <h1>Loading...</h1>}
-          {products.length > 0 && displayProducts}
+      <div className="showPage__container" ref={containerRef}>
+        <Header />
+        <TableOfProducts />
+        <Modalproduct
+          product={getProductById.product}
+          isLoading={getProductById.isLoading}
+          error={getProductById.error}
+        />
+
+        <div className="container">
+          {error ? (
+            <h1>Somthing doesn't work good Refreche The Page</h1>
+          ) : isLoading ? (
+            <IsLoading />
+          ) : (
+            <>
+              <div className="shopPage__products">{displayProducts}</div>
+            </>
+          )}
         </div>
+        {isLoading === false && <Footer />}
       </div>
-          {products.length > 0 && <Footer/>}
     </div>
   );
 }

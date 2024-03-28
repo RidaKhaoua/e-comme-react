@@ -18,17 +18,19 @@ function TableOfProducts() {
     idProductSelected,
     updateId,
   } = useProducts();
-  const [idProduct, setIdproduct] = useState([]); // [] | [1]
+
+  const [idProducts, setIdproducts] = useState([]); // [] | [1]
+
   // skip in the first load
   useEffect(() => {
     if (idProductSelected !== 0) // 0 - 0  | 1 - 0
-      setIdproduct([...idProduct, idProductSelected]);
+      setIdproducts([...idProducts, idProductSelected]); // add idProductSelected to State
   }, [idProductSelected]);
 
-  // work when click on button delete
+  // work when click on button delete to remove Id from state idProduct
   const handelUpdatIdProduct = (id) => {
-    let newIds = idProduct.filter((product) => product !== id);
-    setIdproduct([...newIds]);
+    let newIds = idProducts.filter((product) => product !== id);
+    setIdproducts([...newIds]);
   };
 
   const displayData = shopingList.map((item) => {
@@ -36,7 +38,7 @@ function TableOfProducts() {
       <div
         key={item.id}
         className={`table-products__content ${
-          idProduct.some((product) => product === item.id) ? "active" : ""
+          idProducts.some((product) => product === item.id) ? "active" : ""
         } `}>
         <div className="table-products__image">
           <img src={item.img} alt="" />
@@ -45,20 +47,6 @@ function TableOfProducts() {
           <div className="table-products__title-qantity-wraper">
             <div className="table-products__title">{item.title}</div>
             <div className="table-products__quantity">
-              {/* <button
-                onClick={() => {
-                  minQuantitiy(item.id);
-                }}>
-                -
-              </button>
-              <input readOnly type="text" value={item.qty ? item.qty : 0} />
-              <button
-                onClick={() => {
-                  setQty(item.qty)
-                  addQuantitiyPlus(item.id, qty);
-                }}>
-                +
-              </button> */}
               <ControleQuantity id={item.id} qtyProduct={item.qty}/>
             </div>
             <div className="table-products__price">${item.totalPrice === 0 ? item.price : item.totalPrice}</div>

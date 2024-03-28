@@ -1,14 +1,51 @@
 export default (currentState, action) => {
   switch (action.type) {
+    case "CLONE__DATA":
+      return {
+        ...currentState,
+        productsFiltred: [...currentState.products],
+      };
+
+    case "All__PRODUCT__FROM__API":
+      return {
+        ...currentState,
+        productFromApi: {
+          isLoading: action.payload.isLoading,
+          error:action.payload.error,
+          products: [...action.payload.data],
+        },
+      };
     case "All":
       return { ...currentState, productsFiltred: [...currentState.products] };
+
+    case "PRODUCT__BY__ID":
+      return {
+        ...currentState,
+        getProductById: {
+          isLoading: action.payload.isLoading,
+          error:action.payload.error,
+          product: action.payload.data,
+        },
+      };
+
+    case "REMOVE__ITEM":
+      return {
+        ...currentState,
+        getProductById: {},
+      };
+
+    case "IS__LOADING":
+      return {
+        ...currentState,
+        isLoading: action.payload.isLoading,
+      };
 
     case "FILTER__PRODUCTS":
       return {
         ...currentState,
         productsFiltred: currentState.products.filter((product) => {
           if (
-            product.categorie === action.payload.categorie &&
+            product.category === action.payload.categorie &&
             product.isTopCollection === true
           ) {
             return { ...product };
@@ -35,6 +72,7 @@ export default (currentState, action) => {
             title: action.payload.title,
             price: action.payload.price,
             qty: 1,
+            totalPrice: 0,
           },
         ],
       };
@@ -44,7 +82,11 @@ export default (currentState, action) => {
         ...currentState,
         shopingList: currentState.shopingList.map((item) => {
           if (item.id === action.payload.idProduct) {
-            return { ...item, qty: item.qty + 1 };
+            let newQty = item.qty + 1;
+            let total = (item.price * newQty).toFixed(2);
+            return { ...item, qty: newQty, totalPrice: total };
+          } else {
+            return { ...item };
           }
         }),
       };
@@ -52,14 +94,20 @@ export default (currentState, action) => {
     case "MIN__QUANTITY":
       return {
         ...currentState,
-        shopingList: currentState.shopingList.map((item) => {
-          if (item.id === action.payload.idProduct) {
-            if (item.qty > 0) {
-              return { ...item, qty: item.qty - 1 };
-            } 
-          } 
-          
-        }),
+        shopingList: currentState.shopingList
+          .map((item) => {
+            if (item.id === action.payload.idProduct) {
+              if (item.qty === 1) {
+                return null;
+              } else {
+                let newQty = item.qty - 1;
+                let total = (item.price * newQty).toFixed(2);
+                return { ...item, qty: newQty, totalPrice: total };
+              }
+            }
+            return { ...item };
+          })
+          .filter((pr) => pr !== null),
       };
 
     case "DELETE__PRODUCT":
@@ -72,8 +120,14 @@ export default (currentState, action) => {
         }),
       };
 
+    case "UPDATE__ID":
+      return {
+        ...currentState,
+        idProductSelected: action.payload.id,
+      };
+
     default:
-      console.Error("Action type is not defined: " + action.type);
+      console.log("Action type is not defined: " + action.type);
       return { ...currentState };
   }
 };
